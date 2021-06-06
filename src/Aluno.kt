@@ -6,10 +6,7 @@ class Aluno(
 
     override fun equals(other: Any?): Boolean {
         val outroAluno = other as? Aluno
-
-        if(outroAluno?.codigo == this.codigo){
-            return true
-        }
+        if(outroAluno?.codigo == this.codigo) return true
         return false
     }
 }

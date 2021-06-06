@@ -1,0 +1,1 @@
+abstract class SystemManager(val listaDeMatriculas: MutableList<String> = mutableListOf())

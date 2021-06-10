@@ -6,7 +6,7 @@ abstract class Professor(
 ) {
     override fun equals(other: Any?): Boolean {
         val outroProfessor = other as? Professor
-        if(this.codigo == outroProfessor?.codigo) return true
+        if (this.codigo == outroProfessor?.codigo) return true
         return false
     }
 }

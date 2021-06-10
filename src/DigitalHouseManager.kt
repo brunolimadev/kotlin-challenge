@@ -1,3 +1,5 @@
+import kotlin.test.assertNull
+
 class DigitalHouseManager(
     val listaDeAlunos: MutableList<Aluno> = mutableListOf(),
     val listaDeProfessores: MutableList<Professor> = mutableListOf(),
@@ -12,7 +14,7 @@ class DigitalHouseManager(
     }
 
     fun excluirCurso(codigoCurso: Int) {
-        val cursoFiltrado = this.listaDeCursos.filter { curso -> curso.codigo == codigoCurso }.single()
+        val cursoFiltrado = this.listaDeCursos.find { curso -> curso.codigo == codigoCurso }
         this.listaDeCursos.remove(cursoFiltrado)
     }
 
@@ -40,7 +42,7 @@ class DigitalHouseManager(
 
     fun excluirProfessor(codigoProfessor: Int) {
         val professorFiltrado =
-            this.listaDeProfessores.filter { professor -> professor.codigo == codigoProfessor }.single()
+            this.listaDeProfessores.find { professor -> professor.codigo == codigoProfessor }
         this.listaDeProfessores.remove(professorFiltrado)
     }
 
@@ -51,28 +53,31 @@ class DigitalHouseManager(
     }
 
     fun matricularAluno(codigoAluno: Int, codigoCurso: Int) {
-        val cursoFiltrado = this.listaDeCursos.filter { curso -> curso.codigo == codigoCurso }.single()
-        val alunoFiltrado = this.listaDeAlunos.filter { aluno -> aluno.codigo == codigoAluno }.single()
-        val matricula = Matricula(alunoFiltrado, cursoFiltrado)
-        if (cursoFiltrado.listaDeAlunos.size <= cursoFiltrado.qtdMaximaDeAlunos) {
-            cursoFiltrado.listaDeAlunos.add(alunoFiltrado);
-            this.listaDeMatriculas.add(matricula)
-            println("Matrícula realizada com sucesso")
-        } else {
-            println("Não foi possível realizar sua mátricula. No momento, não há vagas disponíveis.")
+        val cursoFiltrado = this.listaDeCursos.find { curso -> curso.codigo == codigoCurso }
+        val alunoFiltrado = this.listaDeAlunos.find { aluno -> aluno.codigo == codigoAluno }
+
+        if (cursoFiltrado != null && alunoFiltrado != null) {
+            val matricula = Matricula(alunoFiltrado, cursoFiltrado)
+            if (cursoFiltrado.listaDeAlunos.size <= cursoFiltrado.qtdMaximaDeAlunos) {
+                cursoFiltrado.listaDeAlunos.add(alunoFiltrado);
+                this.listaDeMatriculas.add(matricula)
+                println("Matrícula realizada com sucesso")
+            } else {
+                println("Não foi possível realizar sua mátricula. No momento, não há vagas disponíveis.")
+            }
         }
     }
 
     fun alocarProfessores(codigoCurso: Int, codigoProfessorTitular: Int, codigoProfessorAdjunto: Int) {
         val professorTitular =
-            this.listaDeProfessores.filter { professor -> professor.codigo == codigoProfessorTitular }.single()
+            this.listaDeProfessores.find { professor -> professor.codigo == codigoProfessorTitular }
         val professorAdjunto =
-            this.listaDeProfessores.filter { professor -> professor.codigo == codigoProfessorAdjunto }.single()
+            this.listaDeProfessores.find { professor -> professor.codigo == codigoProfessorAdjunto }
         val cursoFiltrado =
-            this.listaDeCursos.filter { curso -> curso.codigo == codigoCurso }.single()
+            this.listaDeCursos.find { curso -> curso.codigo == codigoCurso }
 
-        cursoFiltrado.professorAdjunto = professorAdjunto as ProfessorAdjunto
-        cursoFiltrado.professorTitular = professorTitular as ProfessorTitular
+        cursoFiltrado?.professorAdjunto = professorAdjunto as ProfessorAdjunto
+        cursoFiltrado?.professorTitular = professorTitular as ProfessorTitular
     }
 
 }

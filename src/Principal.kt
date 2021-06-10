@@ -27,5 +27,5 @@ fun main() {
     digitalHouseManager.matricularAluno(aluno5.codigo, curso2.codigo)
     digitalHouseManager.matricularAluno(aluno6.codigo, curso2.codigo)
 
-    
+
 }

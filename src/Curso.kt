@@ -5,7 +5,8 @@ class Curso(
 ) {
     var professorTitular: ProfessorTitular? = null
     var professorAdjunto: ProfessorAdjunto? = null
-    val listaDeAlunos = mutableListOf<Aluno>()
+    var listaDeAlunos = mutableListOf<Aluno>()
+        private set
 
     fun adicionarUmAluno(aluno: Aluno) {
         this.listaDeAlunos.add(aluno)

@@ -1,5 +1,6 @@
 fun main() {
     val digitalHouseManager = DigitalHouseManager()
+    val alunoManager = AlunoManager()
 
     val professorTitular1 = digitalHouseManager.registrarProfessorTitular("Walter", "White", 1000, "Full Stack")
     val professorTitular2 = digitalHouseManager.registrarProfessorTitular("Professor", "Girafales", 1001, "Android")
@@ -26,6 +27,9 @@ fun main() {
     digitalHouseManager.matricularAluno(aluno4.codigo, curso2.codigo)
     digitalHouseManager.matricularAluno(aluno5.codigo, curso2.codigo)
     digitalHouseManager.matricularAluno(aluno6.codigo, curso2.codigo)
-
-
+    println("---------------------------------------------------------------------------")
+    println("[ CONSULTA DE MÁTRICULA - SISTEMA DO ALUNO ]")
+    println("---------------------------------------------------------------------------")
+    alunoManager.consultarCurso(aluno1)
+    alunoManager.consultarCurso(aluno6)
 }

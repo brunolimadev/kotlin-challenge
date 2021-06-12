@@ -1,1 +1,5 @@
-abstract class SystemManager(val listaDeMatriculas: MutableList<Matricula> = mutableListOf())
+abstract class SystemManager(){
+    companion object{
+        val listaDeMatriculas: MutableList<Matricula> = mutableListOf()
+    }
+}

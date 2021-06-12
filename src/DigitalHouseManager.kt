@@ -5,7 +5,7 @@ class DigitalHouseManager(
     val listaDeProfessores: MutableList<Professor> = mutableListOf(),
     val listaDeCursos: MutableList<Curso> = mutableListOf(),
     listaDeMatriculas: MutableList<Matricula> = mutableListOf()
-) : SystemManager(listaDeMatriculas) {
+) : SystemManager() {
 
     fun registrarCurso(nome: String, codigo: Int, qtdMaximaDeAlunos: Int): Curso {
         val curso = Curso(nome, codigo, qtdMaximaDeAlunos)
@@ -59,13 +59,21 @@ class DigitalHouseManager(
         if (cursoFiltrado != null && alunoFiltrado != null) {
             val matricula = Matricula(alunoFiltrado, cursoFiltrado)
             if (cursoFiltrado.listaDeAlunos.size <= cursoFiltrado.qtdMaximaDeAlunos) {
-                cursoFiltrado.listaDeAlunos.add(alunoFiltrado);
-                this.listaDeMatriculas.add(matricula)
-                println("Matrícula realizada com sucesso")
+                cursoFiltrado.adicionarUmAluno(alunoFiltrado);
+                SystemManager.listaDeMatriculas.add(matricula)
+                println("Aluno(a) ${matricula.aluno.nome} matriculado(a) com sucesso no curso: ${cursoFiltrado.nome}.")
+                println("---------------------------------------------------------------------------")
+
             } else {
                 println("Não foi possível realizar sua mátricula. No momento, não há vagas disponíveis.")
+                println("---------------------------------------------------------------------------")
+
             }
+        } else {
+            println("Aluno ou curso não encontrado!")
+            println("---------------------------------------------------------------------------")
         }
+
     }
 
     fun alocarProfessores(codigoCurso: Int, codigoProfessorTitular: Int, codigoProfessorAdjunto: Int) {

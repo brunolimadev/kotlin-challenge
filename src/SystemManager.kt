@@ -1,5 +1,6 @@
 abstract class SystemManager(){
     companion object{
-        val listaDeMatriculas: MutableList<Matricula> = mutableListOf()
+        var listaDeMatriculas: MutableList<Matricula> = mutableListOf()
+        protected set
     }
 }
